@@ -433,7 +433,6 @@ class GaussianInput:
 
         Option: when cart_coords is set to True return the Cartesian coordinates
                 instead of the z-matrix
-
         """
 
         def para_dict_to_string(para, joiner=" "):
@@ -1358,7 +1357,6 @@ class GaussianOutput:
             A list: A list of tuple for each transition such as
                     [(energie (eV), lambda (nm), oscillatory strength), ... ]
         """
-
         transitions = []
 
         # read in file

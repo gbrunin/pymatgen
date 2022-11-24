@@ -64,7 +64,6 @@ class LobsterNeighbors(NearNeighbors):
         id_blist_sg2="ICOBI",
     ):
         """
-
         Args:
             are_coops: (Bool) if True, the file is a ICOOPLIST.lobster and not a ICOHPLIST.lobster; only tested for
             ICOHPLIST.lobster so far
@@ -99,7 +98,6 @@ class LobsterNeighbors(NearNeighbors):
             id_blist_sg2: (str) Identity of data in filename_blist_sg2,
                 e.g., "icoop" or "icobi"
         """
-
         self.ICOHP = Icohplist(are_coops=are_coops, filename=filename_ICOHP)
         self.Icohpcollection = self.ICOHP.icohpcollection
         self.structure = structure
@@ -219,7 +217,6 @@ class LobsterNeighbors(NearNeighbors):
         """
         will return the types of anions present in crystal structure
         Returns:
-
         """
         if self.valences is None:
             raise ValueError("No cations and anions defined")
@@ -260,9 +257,7 @@ class LobsterNeighbors(NearNeighbors):
             only_cation_environments: only data for cations will be returned
             only_indices: will only evaluate the list of isites in this list
         Returns: LobsterLightStructureEnvironments Object
-
         """
-
         lgf = LocalGeometryFinder()
         lgf.setup_structure(structure=self.structure)
         list_ce_symbols = []
@@ -377,7 +372,6 @@ class LobsterNeighbors(NearNeighbors):
             [the latter is useful for plotting summed COHP plots],
             list of the central isite for each label
         """
-
         if self.valences is None and onlycation_isites:
             raise ValueError("No valences are provided")
         if isites is None:
@@ -420,7 +414,6 @@ class LobsterNeighbors(NearNeighbors):
         ylim=(-10, 6),
         integrated=False,
     ):
-
         """
         will plot summed cohps (please be careful in the spin polarized case (plots might overlap (exactly!))
         Args:
@@ -436,9 +429,7 @@ class LobsterNeighbors(NearNeighbors):
 
         Returns:
             plt of the cohps
-
         """
-
         # include COHPPlotter and plot a sum of these COHPs
         # might include option to add Spin channels
         # implement only_bonds_to
@@ -484,7 +475,6 @@ class LobsterNeighbors(NearNeighbors):
 
         Returns: label for cohp (str), CompleteCohp object which describes all cohps of the sites as given by isites
         and the other parameters
-
         """
         # TODO: add options for orbital-resolved cohps
         (
@@ -597,7 +587,6 @@ class LobsterNeighbors(NearNeighbors):
         return plotlabel
 
     def get_info_icohps_between_neighbors(self, isites=None, onlycation_isites=True):
-
         """
         will return infos about interactions between neighbors of a certain atom
         Args:
@@ -605,9 +594,7 @@ class LobsterNeighbors(NearNeighbors):
             onlycation_isites: will only use cations, if isite==None
 
         Returns:
-
         """
-
         lowerlimit = self.lowerlimit
         upperlimit = self.upperlimit
 
@@ -712,7 +699,6 @@ class LobsterNeighbors(NearNeighbors):
         adapt_extremum_to_add_cond=False,
     ):
         """
-
         Args:
             lowerlimit: lower limit which determines the ICOHPs that are considered for the determination of the
             neighbors
@@ -726,7 +712,6 @@ class LobsterNeighbors(NearNeighbors):
             extremum
 
         Returns:
-
         """
         # get extremum
         if lowerlimit is None and upperlimit is None:
@@ -784,7 +769,7 @@ class LobsterNeighbors(NearNeighbors):
                         "weight": 1,
                         # Here, the ICOBIs and ICOOPs are added based on the bond
                         # strength cutoff of the ICOHP
-                        # more changes are neccessary here if we use icobis for cutoffs
+                        # more changes are necessary here if we use icobis for cutoffs
                         "edge_properties": {
                             "ICOHP": self.list_icohps[ineighbors][ineighbor],
                             "bond_length": self.list_lengths[ineighbors][ineighbor],
@@ -847,7 +832,6 @@ class LobsterNeighbors(NearNeighbors):
             only_bonds_to (list): list of str, e.g. ["O"] that will ensure that only bonds to "O" will be considered
 
         Returns:
-
         """
         # run over structure
         list_neighsite = []
@@ -959,7 +943,6 @@ class LobsterNeighbors(NearNeighbors):
             additional_condition (int): additional condition
 
         Returns:
-
         """
         neighbors_from_ICOHPs = []
         lengths_from_ICOHPs = []
@@ -1099,7 +1082,6 @@ class LobsterNeighbors(NearNeighbors):
             only_bonds_to (list): list of str, e.g. ["O"] that will ensure that only bonds to "O" will be considered
 
         Returns:
-
         """
         icohps = icohpcollection.get_icohp_dict_of_site(
             site=isite,
@@ -1118,7 +1100,6 @@ class LobsterNeighbors(NearNeighbors):
             atomstring: string such as "Na1"
 
         Returns: integer indicating the position in the POSCAR
-
         """
         return int(LobsterNeighbors._split_string(atomstring)[1]) - 1
 
@@ -1130,7 +1111,6 @@ class LobsterNeighbors(NearNeighbors):
             s (str): string
 
         Returns:
-
         """
         head = s.rstrip("0123456789")
         tail = s[len(head) :]
@@ -1144,7 +1124,6 @@ class LobsterNeighbors(NearNeighbors):
             site: site object
 
         Returns:
-
         """
         unitcell = []
         for coord in site.frac_coords:
@@ -1171,7 +1150,6 @@ class LobsterNeighbors(NearNeighbors):
             adapt_extremum_to_add_cond: should the extrumum be adapted to the additional condition
             additional_condition: additional condition to determine which bonds are relevant
         Returns: [-100000, min(max_icohp*0.15,-0.1)]
-
         """
         # TODO: make it work for COOPs
         if not adapt_extremum_to_add_cond:
@@ -1281,7 +1259,6 @@ class LobsterLightStructureEnvironments(LightStructureEnvironments):
             valences: list of valences
 
         Returns: LobsterLightStructureEnvironments
-
         """
         strategy = None
         valences = valences

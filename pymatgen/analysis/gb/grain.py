@@ -5,6 +5,8 @@
 Module containing classes to generate grain boundaries.
 """
 
+from __future__ import annotations
+
 import itertools
 import logging
 import warnings
@@ -816,7 +818,6 @@ class GrainBoundaryGenerator:
                 0-a, 1-b, 2-c. Only may be needed for orthorhombic system.
         Returns:
                axial ratio needed for GB generator (list of integers).
-
         """
         structure = self.initial_structure
         lat_type = self.lat_type
@@ -1342,7 +1343,6 @@ class GrainBoundaryGenerator:
                     When generate the microstructures of the grain boundary using these angles,
                     you need to analyze the symmetry of the structure. Different angles may
                     result in equivalent microstructures.
-
         """
         sigmas = {}
         # make sure gcd(r_axis)==1
@@ -1423,7 +1423,6 @@ class GrainBoundaryGenerator:
                     When generate the microstructure of the grain boundary using these
                     angles, you need to analyze the symmetry of the structure. Different
                     angles may result in equivalent microstructures.
-
         """
         sigmas = {}
         # make sure gcd(r_axis)==1
@@ -1545,7 +1544,6 @@ class GrainBoundaryGenerator:
                     When generate the microstructure of the grain boundary using these
                     angles, you need to analyze the symmetry of the structure. Different
                     angles may result in equivalent microstructures.
-
         """
         sigmas = {}
         # transform four index notation to three index notation
@@ -1683,7 +1681,6 @@ class GrainBoundaryGenerator:
                     When generate the microstructure of the grain boundary using these
                     angles, you need to analyze the symmetry of the structure. Different
                     angles may result in equivalent microstructures.
-
         """
         sigmas = {}
         # make sure gcd(r_axis)==1
@@ -1781,7 +1778,7 @@ class GrainBoundaryGenerator:
             cutoff (integer): the cutoff of sigma values.
             r_axis (list of three integers, e.g. u, v, w):
                     the rotation axis of the grain boundary, with the format of [u,v,w].
-            c2_b2_a2_ratio (list of three integers, e.g. mu,lamda, mv):
+            c2_b2_a2_ratio (list of three integers, e.g. mu,lambda, mv):
                     mu:lam:mv is the square of the orthorhombic axial ratio with rational
                     numbers. If irrational for one axis, set it to None.
                     e.g. mu:lam:mv = c2,None,a2, means b2 is irrational.
@@ -1797,7 +1794,6 @@ class GrainBoundaryGenerator:
                     When generate the microstructure of the grain boundary using these
                     angles, you need to analyze the symmetry of the structure. Different
                     angles may result in equivalent microstructures.
-
         """
         sigmas = {}
         # make sure gcd(r_axis)==1
@@ -2093,7 +2089,6 @@ class GrainBoundaryGenerator:
         Returns:
             t_matrix: a slab lattice ( 3 by 3 integer array):
         """
-
         # set the transform matrix in real space
         trans = trans_cry
         # transform matrix in reciprocal space
@@ -2244,7 +2239,7 @@ class GrainBoundaryGenerator:
                         if abs(np.dot(temp, surface) - 0) > 1.0e-8:
                             c_cross = np.cross(np.matmul(temp, trans), np.matmul(surface, ctrans))
                             if np.linalg.norm(c_cross) < 1.0e-8:
-                                # c vetor length itself
+                                # c vector length itself
                                 c_norm_temp = np.linalg.norm(np.matmul(temp, trans))
                                 if normal_init:
                                     if c_norm_temp < c_norm:

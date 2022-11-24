@@ -1,10 +1,8 @@
 Change log
 ==========
 
-v2022.9.8
----------
-* @janosh Add AirssProvider.as_dict
-* @gpetretto Outcar parsing optimization.
-* @ScottNotFound Adds res file io to handle results from airss searches
-* @janosh Fixes the `AttributeError` currently raised when passing disordered structures to methods like `get_cn()` and `get_bonded_structure()` of `CrystalNN` and other `NearNeighbors` subclasses.
-* @naik-aakash Added new option `standard_with_comp_range` for generating lobsterin files using vasp
+v2022.11.7
+----------
+* PR #2724 from @janosh: raise ValueError in ``SpacegroupAnalyzer.get_symmetrized_structure()`` if spglib returns no symmetries
+* PR #2720 by @utf: Fix tensor mapping
+* PR #2562 from @sudarshanv01: In case the Fock-matrix and eigenvalues are requested by the user (though the flags `scf_final_print` or `scf_print`), outputs.py now allows parsing both these quantities.

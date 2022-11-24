@@ -161,7 +161,6 @@ class EnumlibAdaptor:
             f"Spacegroup {fitter.get_space_group_symbol()} ({fitter.get_space_group_number()}) "
             f"with {len(symmetrized_structure.equivalent_sites)} distinct sites"
         )
-
         """
         Enumlib doesn"t work when the number of species get too large. To
         simplify matters, we generate the input file only with disordered sites
@@ -170,7 +169,6 @@ class EnumlibAdaptor:
         different equivalent sites is dealt with by having determined the
         spacegroup earlier and labelling the species differently.
         """
-
         # index_species and index_amounts store mappings between the indices
         # used in the enum input file, and the actual species and amounts.
         index_species = []

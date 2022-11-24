@@ -308,7 +308,6 @@ class Slab(Structure):
         Returns:
             (bool) Whether surfaces are symmetric.
         """
-
         sg = SpacegroupAnalyzer(self, symprec=symprec)
         symmops = sg.get_point_group_operations()
 
@@ -558,7 +557,6 @@ class Slab(Structure):
             than one unequivalent site. This will allow us to use this for
             compound systems.
         """
-
         from pymatgen.analysis.local_env import VoronoiNN
 
         # Get a dictionary of coordination numbers
@@ -624,7 +622,6 @@ class Slab(Structure):
             point: Fractional coordinate. A point equivalent to the
                 parameter point, but on the other side of the slab
         """
-
         sg = SpacegroupAnalyzer(self)
         ops = sg.get_symmetry_operations(cartesian=cartesian)
 
@@ -664,7 +661,6 @@ class Slab(Structure):
         Returns:
             (Slab): The modified slab
         """
-
         # For now just use the species of the
         # surface atom as the element to add
 
@@ -684,7 +680,6 @@ class Slab(Structure):
             indices ([indices]): The indices of the sites
                 in the slab to remove.
         """
-
         slabcopy = SpacegroupAnalyzer(self.copy()).get_symmetrized_structure()
         points = [slabcopy[i].frac_coords for i in indices]
         removal_list = []
@@ -827,7 +822,6 @@ class SlabGenerator:
                 usually sufficient.
             reorient_lattice (bool): reorients the lattice parameters such that
                 the c direction is the third vector of the lattice matrix
-
         """
         # pylint: disable=E1130
         # Add Wyckoff symbols of the bulk, will help with
@@ -944,7 +938,6 @@ class SlabGenerator:
         Returns:
             (Slab) A Slab object with a particular shifted oriented unit cell.
         """
-
         h = self._proj_height
         p = round(h / self.parent.lattice.d_hkl(self.miller_index), 8)
         if self.in_unit_planes:
@@ -1186,7 +1179,6 @@ class SlabGenerator:
         Returns:
             (Slab) A Slab object with a particular shifted oriented unit cell.
         """
-
         for pair in bonds:
             blength = bonds[pair]
 
@@ -1250,7 +1242,6 @@ class SlabGenerator:
         Returns:
             (Slab) A Slab object with a particular shifted oriented unit cell.
         """
-
         slab = init_slab.copy()
 
         # Determine what fraction the slab is of the total cell size
@@ -1286,7 +1277,6 @@ class SlabGenerator:
         )
 
     def nonstoichiometric_symmetrized_slab(self, init_slab):
-
         """
         This method checks whether or not the two surfaces of the slab are
         equivalent. If the point group of the slab has an inversion symmetry (
@@ -1302,7 +1292,6 @@ class SlabGenerator:
         Returns:
             Slab (structure): A symmetrized Slab object.
         """
-
         if init_slab.is_symmetric():
             return [init_slab]
 
@@ -1471,7 +1460,6 @@ class ReconstructionGenerator:
             WILL MODIFY THE BOTTOM SURFACE ACCORDINGLY TO RETURN A SLAB WITH
             EQUIVALENT SURFACES.
         """
-
         if reconstruction_name not in reconstructions_archive:
             raise KeyError(
                 f"The reconstruction_name entered ({reconstruction_name}) does not exist in the "
@@ -1525,7 +1513,6 @@ class ReconstructionGenerator:
         Returns:
             (Slab): The reconstructed slab.
         """
-
         slabs = self.get_unreconstructed_slabs()
         recon_slabs = []
 
